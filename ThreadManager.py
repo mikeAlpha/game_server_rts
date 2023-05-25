@@ -36,4 +36,5 @@ def UpdateMain():
       actionToExecuteOnMainThread = False
       lock.release()
       for i in range(len(executeCopiedOnMainThread)):
+         print("Here1")
          executeCopiedOnMainThread[i]()

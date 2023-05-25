@@ -1,17 +1,14 @@
 BYTE_COUNT = 4
 def send_msg(sock, msg):
-    """Send a message via the socket."""
     msg = add_msg_header(msg)
     sock.sendall(msg)
 def recv_msg(sock):
-    """Receive a message via the socket."""
     raw_msglen = recvall(sock, BYTE_COUNT)
     if not raw_msglen:
         return None
     msglen = len_frombytes(raw_msglen)
     return recvall(sock, msglen)
 def recvall(sock, length):
-    """Get a message of a certain length from the socket stream"""
     data = bytearray()
     while len(data) < length:
         packet = sock.recv(length - len(data))
