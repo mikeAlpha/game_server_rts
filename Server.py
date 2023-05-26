@@ -14,6 +14,8 @@ class RequestID(Enum):
     UPGRADE = 3
     UPGRADE_COMP = 4
     UPDATE_BUILD_POS = 5
+    ADD_BUILDING = 6
+    ADD_BUILDING_COMP = 7
 
  #threading (Note: use Threadmanager for that)
 _lock = threading.Lock()
@@ -91,17 +93,18 @@ def StartServer():
             if not data:
                 print('Bye')
                 _lock.release()
+                c.close()
                 break
             id = struct.unpack('<i',data[:4])[0]
             check_data(id,data,c)
-        # c.close()
+    sckt.close()
 
-        if keyboard.is_pressed("c"):
-            print("Closing server....")
-            _lock.release()
-            sckt.close()
-            c.close()
-            break
+        # if keyboard.is_pressed("c"):
+        #     print("Closing server....")
+        #     _lock.release()
+        #     sckt.close()
+        #     c.close()
+        #     break
 
     # while True:
 
